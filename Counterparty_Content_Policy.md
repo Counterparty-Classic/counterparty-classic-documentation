@@ -41,22 +41,20 @@ Generally, a polite warning will be given before any further moderation takes pl
 Discussions that are off topic or violate any of the other channel rules will be closed with a brief explanation as to why it was closed. Closed discussions may be deleted shortly after they are closed. Comments that violate the stated rules will also be deleted. If you have a question as to why a comment or discussion was deleted, please politely ask a mod for an explanation.
 
 ### 4. Bannings
-Accounts that post spam or clear scams will receive an automatic blacklist/ban without warning. Persistent violation of the channel rules may result in a blacklist/ban. You may expect at least one warning from a mod before a blacklist/ban is issued for violation of channel rules. Please note that a blacklist/ban is not necessarily permanent. Sometimes a "cooling off" period is needed. If you would like to have your blacklist/ban removed, and the mod you banned you has not already given you a way to remove your ban, please contact moderators@counterparty.io. Blacklists/bans may be overturned if the mods feel that the action that previously resulted in the blacklist/ban has been corrected.
+Accounts that post spam or clear scams will receive an automatic blacklist/ban without warning. Persistent violation of the channel rules may result in a blacklist/ban. You may expect at least one warning from a mod before a blacklist/ban is issued for violation of channel rules. Please note that a blacklist/ban is not necessarily permanent. Sometimes a "cooling off" period is needed. If you would like to have your blacklist/ban removed, and the mod you banned you has not already given you a way to remove your ban, please contact j-dog@j-dog.net. Blacklists/bans may be overturned if the mods feel that the action that previously resulted in the blacklist/ban has been corrected.
 
 ### 5. Appeals
-If you have an issue with a moderation practice on this channel, please do not persist in arguing with the mods. Politely ask for an explanation and one will be provided. If you are not satisfied with the explanation, and you insist on continuing the argument with the mod, you run the risk of further moderation action. If you would like to appeal a mod's decision or moderation practice, you may email the moderators group collectively at moderators@counterparty.io The purpose of this rule is to keep the Counterparty properties clear from moderation arguments and to avoid unnecessary escalation of moderation (i.e., deletion and blacklist). 
+If you have an issue with a moderation practice on this channel, please do not persist in arguing with the mods. Politely ask for an explanation and one will be provided. If you are not satisfied with the explanation, and you insist on continuing the argument with the mod, you run the risk of further moderation action. If you would like to appeal a mod's decision or moderation practice, you may email the moderators group collectively at j-dog@j-dog.net The purpose of this rule is to keep the Counterparty properties clear from moderation arguments and to avoid unnecessary escalation of moderation (i.e., deletion and blacklist). 
 
 ## CURRENT MODERATION TEAM
 
 * Jeremy Johnson (https://t.me/jdogresorg)
-* Joe Looney (https://t.me/hodlencoinfield)
-* Shawn Leary (https://t.me/ShawnLeary)
 
-Moderators can collectively be reached via emailing moderators@counterparty.io
+Moderators can collectively be reached via emailing j-dog@j-dog.net
 
 ### How to become a moderator
 
-Community members may apply for moderator status. We generally look for intelligent, well-behaved, and reliable members of the community. If you are interested and think you have what it takes, please reach out to us at moderators@counterparty.io, or on Slack.
+Community members may apply for moderator status. We generally look for intelligent, well-behaved, and reliable members of the community. If you are interested and think you have what it takes, please reach out to us at j-dog@j-dog.net∂, or on Slack.
 
 ## Additional information
 
