@@ -1,9 +1,9 @@
-Content Policy for Counterparty forums and chat rooms
+Content Policy for Counterparty Classic forums and chat rooms
 ========================
 _(collectively referred to as the **Counterparty properties**)_
 
 ### 1. Stay on Topic
-The Counterparty properties are a place to discuss matters related to the [Counterparty cryptocurrency](http://counterparty.io/). Discussions that are off-topic to this will be closed and potentially deleted. Comments within a discussion may naturally veer in different directions, and this is generally not a problem. However, if the moderators feel that the comment chain has reached its limit, we will give a polite notice about being off topic before moderation is used.
+The Counterparty properties are a place to discuss matters related to the Counterparty Classic cryptocurrency platform. Discussions that are off-topic to this will be closed and potentially deleted. Comments within a discussion may naturally veer in different directions, and this is generally not a problem. However, if the moderators feel that the comment chain has reached its limit, we will give a polite notice about being off topic before moderation is used.
 
 ### 2. No Self-Promotion
 "Self-promotion" is an attempt to redirect traffic from the Counterparty properties to your personal blog, chat, YouTube channel, etc. Pure self-promotion will not be allowed, however, if you are trying to get feedback and reviews from the community for your Counterparty-based project, or an outlet of your original content that relates to Counterparty in some direct manner, then reasonable and limited promotion is permitted. If you are unsure, please ask a mod before doing so.
@@ -32,7 +32,7 @@ As the old saying goes, “we know it when we see it.”
 ## SANCTIONS AND CONFLICT RESOLUTION
 
 ### 1. Contact A Mod
-If you are uncertain about a moderation action, or if you you have questions, comments, or concerns regarding the Counterparty properties, you can feel free to contact moderators on the Telegram or Slack chats, via direct message, or email moderators@counterparty.io. 
+If you are uncertain about a moderation action, or if you you have questions, comments, or concerns regarding the Counterparty properties, you can feel free to contact moderators on the Telegram or Slack chats, via direct message, or email j-dog@j-dog.net. 
 
 ### 2. Warnings
 Generally, a polite warning will be given before any further moderation takes place. You will not receive a warning in cases of spam, scams or in cases where it is blatantly obvious that you are posting on the Counterparty properties for the sole purpose of trolling and causing problems.
