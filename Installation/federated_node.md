@@ -2,9 +2,9 @@
 
 ## Introduction
 
-This document describes how one can set up their own Counterparty "Federated Node" system, on Linux, Windows or OS X.
+This document describes how one can set up their own Counterparty Classic "Federated Node" system, on Linux, Windows or OS X.
 
-A Federated Node is a self-contained system that runs the some or all of the Counterparty software stack, via Docker. Each system operates as a Bitcoin and Counterparty "full node". Using this toolset, one can generally get started running the Counterparty software much quicker and more easily than a manual installation of the various components.
+A Federated Node is a self-contained system that runs the some or all of the Counterparty Classic software stack, via Docker. Each system operates as a Bitcoin and Counterparty Classic "full node". Using this toolset, one can generally get started running the Counterparty Classic software much quicker and more easily than a manual installation of the various components.
 
 The document is primarily intended for power users and developers.
 
@@ -12,12 +12,11 @@ The document is primarily intended for power users and developers.
 <a name="services"></a>
 Services run on a Federated Node include some or all of the following:
 
-* **counterparty-server**: `counterparty-lib` + `counterparty-cli`. Implements support for the core Counterparty protocol, via a provided REST API and command line interface.
+* **counterparty-server**: `counterparty-classic-lib` + `counterparty-classic-cli`. Implements support for the core Counterparty protocol, via a provided REST API and command line interface.
 * **counterblock**: Provides additional services (required by `counterwallet` and potentially other services) beyond those offered in the API provided by `counterparty-server`. It features a full-fledged JSON RPC-based API, and has an extensible architecture to support custom plugins.
 * **counterwallet**: The reference Web wallet for Counterparty. This is a collection of HTML, CSS and javascript resources, served by `nginx`.
 * **bitcoind**: Reference Bitcoin implementation, used by `counterparty-server` to sync to the Bitcoin blockchain.
 * **addrindexrs**: Bitcoin address index service. Maintains an updated database of UTXOs for usage in the counterparty services.
-* **armory_utxsvr**: A service used by ``counterblock`` with Counterwallet to support [Offline Armory transactions](http://counterparty.io/docs/create_armory_address/). This service requires Armory itself, which is automatically installed as part of the Federated Node setup procedure.
 * **nginx**: Reverse proxies `counterwallet` access. Not used with `counterparty-server`-only or `counterblock`-only nodes.
 * **mongodb and redis**: Used by `counterblock`.
 
@@ -28,20 +27,19 @@ Please note that Federated Node should not be installed on a system which alread
 
 - **Memory**: 4GB RAM (`bitcoind`, `counterparty-server` only), 8GB+ RAM (full stack)
 - **Disk space:** The exact disk space required will be dependent on what services are run on the node:
-    - For ``bitcoin`` databases: **~610GB** (mainnet), **~37GB** (testnet)
-    - For ``addrindexrs`` database: **~130GB** (mainnet), **~9GB** (testnet)
+    - For ``bitcoin`` databases: **~720GB** (mainnet), **~163GB** (testnet)
+    - For ``addrindexrs`` database: **~152GB** (mainnet), **~40GB** (testnet)
     - For ``counterparty`` databases: **~9GB** (mainnet), **~2GB** (testnet)
-    - For ``armory_utxsvr``: **~650GB** (mainnet), **~40GB** (testnet)
 - **OS:** *Please note that Ubuntu Linux is the recommended OS at this time, as most of our testing is performed on it. Windows and OS X support is considered in BETA.*
     - **Linux**: We recommend Ubuntu 22.04 LTS 64-bit, but other, modern versions of Linux should work, as long as they support the newest released version of Docker
     - **Windows**: Windows 7 or higher, or Server 2008 or higher. 64-bit required
-    - **OS X**: 10.8 "Mountain Lion" or higher
+    - **OS X**: 15.0 "Sequoia" or higher
 
 ## Pre-installation
 
 ### Windows
 
-**NOTE**: Installation on Windows is still in *BETA* state, and we cannot promise a fully-working environment. [Please report](https://github.com/CounterpartyXCP/federatednode/issues) any bugs you find.
+**NOTE**: Installation on Windows is still in *BETA* state, and we cannot promise a fully-working environment. [Please report](https://github.com/Counterparty-Classic/counterparty-classic-fednode/issues) any bugs you find.
 
 * **Python 3.5.x**: [Download and install](https://www.python.org/downloads/) the latest Python 3.5.x release. Make sure you check the box "Add Python 3.5 to PATH" on the first page. (If you get an error during installation, make sure your windows system is fully updated via Windows Update.)
 * **Docker**: If using Windows 10, we recommend to [install Docker for Windows](https://docs.docker.com/engine/installation/windows/). For all other versions of Windows, [install Docker Toolbox](https://docs.docker.com/toolbox/toolbox_install_windows/).
@@ -94,8 +92,8 @@ On Linux and OS X, install as a non-root sudo-er from home directory.
 
 On all OS, clone federatednode repo and enter cloned directory:
 ```
-git clone https://github.com/CounterpartyXCP/federatednode.git
-cd federatednode
+git clone https://github.com/Counterparty-Classic/counterparty-classic-fednode.git
+cd counterparty-classic-fednode
 ```
 
 On Linux and OS X:
@@ -165,7 +163,8 @@ Once the containers are installed and running, keep in mind that it will take so
 You may check the sync status by tailing the appropriate service logs, e.g. for Bitcoin Core and Counterparty server on mainnet:
 ```
 fednode tail bitcoin
-fednode tail counterparty
+fednode tail counterparty-classic-addrindexrs
+fednode tail counterparty-classic
 ```
 
 <a name="accessing"></a>**Access the system**
@@ -197,7 +196,7 @@ cd extras/host_security
 sudo ./run.py
 ```
 
-Note that this script will make several modifications to your host system as it runs. Please review what it does [here](https://github.com/CounterpartyXCP/federatednode/blob/master/extras/host_security/run.py) before using it.
+Note that this script will make several modifications to your host system as it runs. Please review what it does [here](https://github.com/Counterparty-Classic/counterparty-classic-fednode/blob/master/extras/host_security/run.py) before using it.
 
 If you expect to run a busy Federated Node that requires counterblock, you can consider making the following performance tweaks for mongodb and redis. Please do not make these changes to the host if you're not comfortable with them because they impact not only Docker but the entire OS.
 
@@ -215,30 +214,30 @@ fednode ps
 
 **Modifying configurations**
 
-Configuration files for the `bitcoin`, `counterparty` and `counterblock` services are stored under `federatednode/config/` and may be freely edited. The various locations are as follows:
+Configuration files for the `bitcoin`, `counterparty-classic` and `counterparty-classic-counterblock` services are stored under `counterparty-classic-fednode/config/` and may be freely edited. The various locations are as follows:
 
-* `bitcoin`: See `federatednode/config/bitcoin/bitcoin.conf`
-* `bitcoin-testnet`: See `federatednode/config/bitcoin/bitcoin.testnet.conf`
-* `counterparty`: See `federatednode/config/counterparty/server.conf`
-* `counterparty-testnet`: See `federatednode/config/counterparty/server.testnet.conf`
-* `counterblock`: See `federatednode/config/counterblock/server.conf`
-* `counterblock-testnet`: See `federatednode/config/counterblock/server.testnet.conf`
+* `bitcoin`: See `counterparty-classic-fednode/config/bitcoin/bitcoin.conf`
+* `bitcoin-testnet`: See `counterparty-classic-fednode/config/bitcoin/bitcoin.testnet.conf`
+* `counterparty-classic`: See `counterparty-classic-fednode/config/counterparty-classic/server.conf`
+* `counterparty-classic-testnet`: See `counterparty-classic-fednode/config/counterparty-classic/server.testnet.conf`
+* `counterparty-classic-counterblock`: See `counterparty-classic-fednode/config/counterparty-classic-counterblock/server.conf`
+* `counterparty-classic-counterblock-testnet`: See `counterparty-classic-fednode/config/counterparty-classic-counterblock/server.testnet.conf`
 * `redis`: shared service used for both mainnet and testnet
 * `mongodb`: shared service used for both mainnet and testnet
 
 Remember: once done editing a configuration file, you must `restart` the corresponding service. Also, please don't change port or usernames/passwords if the configuration files unless you know what you are doing (as the services are coded to work together smoothly with specific values).
 
-For example, a user with base setup (Bitcoin Core & Counterparty Server) could make Counterparty use existing Bitcoin Core by changing configuration files found under federatednode/config/counterparty/ (`backend-connect` in Counterparty server configuration files and `wallet-connect` in client configuration files.) At this point Bitcoin Core (mainnet and/or testnet) container(s) could be stopped and counterparty server container restarted. If your existing Bitcoin Server allows RPC connections, with proper settings and correct RPC credentials in their configuration files, counterparty (server), counterblock and counterwallet can all use it so that you don't have to run bitcoin or bitcoin-testnet container.
+For example, a user with base setup (Bitcoin Core & Counterparty Server) could make Counterparty use existing Bitcoin Core by changing configuration files found under counterparty-classic-fednode/config/counterparty/ (`backend-connect` in Counterparty server configuration files and `wallet-connect` in client configuration files.) At this point Bitcoin Core (mainnet and/or testnet) container(s) could be stopped and counterparty server container restarted. If your existing Bitcoin Server allows RPC connections, with proper settings and correct RPC credentials in their configuration files, counterparty (server), counterblock and counterwallet can all use it so that you don't have to run bitcoin or bitcoin-testnet container.
 
 **Viewing/working with stored data**
 
 The various services use [Docker named volumes](https://docs.docker.com/engine/tutorials/dockervolumes/) to store data that is meant to be persistent:
 
 * `bitcoin` and `bitcoin-testnet`: Stores blockchain data in the `federatednode_bitcoin-data` volume
-* `addrindexrs` and `addrindexrs-testnet`: Stores index data in the `federatednode_addrindexrs-data` volume
-* `counterparty` and `counterparty-testnet`: Stores Counterparty databases in the `federatednode_counterparty-data` volume
-* `counterblock` and `counterblock-testnet`: Stores Counterblock asset info (images), etc in the `federatednode_counterblock-data` volume
-* `mongodb`: Stores the databases for `counterblock` and `counterblock-testnet` in the `federatednode_mongodb-data` volume
+* `counterparty-classic-addrindexrs` and `counterparty-classic-addrindexrs-testnet`: Stores index data in the `federatednode_counterparty-classic-addrindexrs-data` volume
+* `counterparty-classic` and `counterparty-classic-testnet`: Stores Counterparty databases in the `federatednode_counterparty-classic-data` volume
+* `counterparty-classic-counterblock` and `counterparty-classic-counterblock-testnet`: Stores Counterblock asset info (images), etc in the `federatednode_counterparty-classic-counterblock-data` volume
+* `mongodb`: Stores the databases for `counterparty-classic-counterblock` and `counterparty-classic-counterblock-testnet` in the `federatednode_mongodb-data` volume
 
 Use `docker volume inspect <volume-name>` to display volume location. See `docker volume --help` for help on how to interact with Docker volumes.
 
@@ -256,17 +255,23 @@ fednode logs <service>
 
 <a name="servicenames"></a>Where `<service>` may be one the following, or blank to tail all services:
 
-* `counterparty` (`counterparty-server` mainnet)
-* `counterblock` (`counterblock` mainnet)
-* `bitcoin` (`bitcoin` mainnet)
-* `addrindexrs` (`addrindexrs` mainnet)
-* `armory_utxsvr` (`armory_utxsvr` mainnet)
-* `counterparty-testnet`
-* `counterblock-testnet`
+### mainnet
+* `bitcoin`
+* `counterparty-classic` 
+* `counterparty-classic-addrindexrs` 
+* `counterparty-classic-counterblock`
+* `counterparty-classic-counterwallet`
+* `counterparty-classic-http-addrindexrs` 
+* `counterparty-classic-xcp-proxy` 
+
+### testnet
 * `bitcoin-testnet`
-* `addrindexrs-testnet`
-* `armory_utxsvr-testnet`
-* `counterwallet`
+* `counterparty-classic-testnet`
+* `counterparty-classic-addrindexrs-testnet`
+* `counterparty-classic-counterblock-testnet`
+* `counterparty-classic-http-addrindexrs-testnet` 
+* `counterparty-classic-xcp-proxy-testnet` 
+
 
 **Stopping and restarting containers**
 
@@ -290,9 +295,9 @@ Where `<service>` is one of the service names listed [above](#servicenames), and
 
 For example:
 ```
-fednode exec counterparty counterparty-client send --source=12u4Vymr3bGTywjMQDgBkwAnazwQuDqzJG --destination=1AanCo9CJSomhUEy2YrhfXrU1PboBhFaBq --quantity=1.5 --asset=XCP
+fednode exec counterparty-classic counterparty-client send --source=12u4Vymr3bGTywjMQDgBkwAnazwQuDqzJG --destination=1AanCo9CJSomhUEy2YrhfXrU1PboBhFaBq --quantity=1.5 --asset=XCP
 fednode exec bitcoin-testnet bitcoin-cli getpeerinfo
-fednode exec counterblock ls /root
+fednode exec counterparty-classic-counterblock ls /root
 ```
 
 **Getting a shell in a conainer**
@@ -314,13 +319,18 @@ fednode update <service>
 
 <a name="servicenames_code"></a>Where `<service>` is one of the following, or blank for all applicable services:
 
-* `counterparty`
-* `counterparty-testnet`
-* `counterblock`
-* `counterblock-testnet`
-* `armory_utxsvr`
-* `armory_utxsvr-testnet`
-* `counterwallet`
+* `counterparty-classic`
+* `counterparty-classic-testnet`
+* `counterparty-classic-addrindexrs` 
+* `counterparty-classic-addrindexrs-testnet` 
+* `counterparty-classic-counterblock`
+* `counterparty-classic-counterblock-testnet`
+* `counterparty-classic-counterwallet`
+* `counterparty-classic-http-addrindexrs` 
+* `counterparty-classic-http-addrindexrs-testnet` 
+* `counterparty-classic-xcp-proxy` 
+* `counterparty-classic-xcp-proxy-testnet` 
+
 
 **Reparsing blockchain data**
 
@@ -330,7 +340,7 @@ Both `counterparty-server` and `counterblock` read in blockchain data and constr
 fednode reparse <service>
 ```
 
-Where service is `counterparty`, `counterparty-testnet`, `counterblock`, or `counterblock-testnet`.
+Where service is `counterparty-classic`, `counterparty-classic-testnet`, `counterparty-classic-counterblock`, or `counterparty-classic-counterblock-testnet`.
 
 **Rebuilding a service container**
 
@@ -381,7 +391,7 @@ By default, the system is set up to use a self-signed SSL certificate. If you ar
 you should get your own SSL certificate from your DNS registrar so that your users don't see a certificate warning when
 they visit your site.
 
-Once you have that certificate, create a nginx-compatible ``.pem`` file. Copy that `.pem` file to `federatednode/config/counterwallet/ssl/counterwallet.pem` and the cooresponding certificate `.key` file to `federatednode/config/counterwallet/ssl/counterwallet.key`. (Note that there will be a `counterwallet.key` and `counterwallet.pem` file already there, which are the default, self-signed certificates, and can be safely overridden.) Then, restart the `counterwallet` service for the new certificate to take effect.
+Once you have that certificate, create a nginx-compatible ``.pem`` file. Copy that `.pem` file to `counterparty-classic-fednode/config/counterwallet/ssl/counterwallet.pem` and the cooresponding certificate `.key` file to `counterparty-classic-fednode/config/counterwallet/ssl/counterwallet.key`. (Note that there will be a `counterwallet.key` and `counterwallet.pem` file already there, which are the default, self-signed certificates, and can be safely overridden.) Then, restart the `counterwallet` service for the new certificate to take effect.
 
 
 ### Monitoring the Server
